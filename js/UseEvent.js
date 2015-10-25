@@ -3,72 +3,127 @@
  */
 
 /*
- * event¶ÔÏóÊôĞÔºÍ·½·¨:
- * type ÊÂ¼şÀàĞÍ
- * target ÊÂ¼şÄ¿±ê
- * currentTarget µ±Ç°ÊÂ¼şÄ¿±ê
- * preventDefault() ×èÖ¹Ä¬ÈÏĞĞÎª
- * stopPropagation() ×èÖ¹ÊÂ¼şÃ°ÅİºÍ²¶»ñ
+ * eventï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÔºÍ·ï¿½ï¿½ï¿½:
+ * type ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+ * target ï¿½Â¼ï¿½Ä¿ï¿½ï¿½
+ * currentTarget ï¿½ï¿½Ç°ï¿½Â¼ï¿½Ä¿ï¿½ï¿½
+ * preventDefault() ï¿½ï¿½Ö¹Ä¬ï¿½ï¿½ï¿½ï¿½Îª
+ * stopPropagation() ï¿½ï¿½Ö¹ï¿½Â¼ï¿½Ã°ï¿½İºÍ²ï¿½ï¿½ï¿½
  *
- * IEÖĞevent¶ÔÏóµÄÊôĞÔ
- * cancelBubble ÎªtrueÊ±,È¡ÏûÊÂ¼şÃ°Åİ
- * returnValue ÎªfalseÊ±,×èÖ¹Ä¬ÈÏĞĞÎª
- * srcElement µ±Ç°ÊÂ¼şÄ¿±ê
- * type ÊÂ¼şÀàĞÍ
+ * IEï¿½ï¿½eventï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * cancelBubble ÎªtrueÊ±,È¡ï¿½ï¿½ï¿½Â¼ï¿½Ã°ï¿½ï¿½
+ * returnValue ÎªfalseÊ±,ï¿½ï¿½Ö¹Ä¬ï¿½ï¿½ï¿½ï¿½Îª
+ * srcElement ï¿½ï¿½Ç°ï¿½Â¼ï¿½Ä¿ï¿½ï¿½
+ * type ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
  * */
 
 /*
- * onclick thisÍêÃÀÖ§³Ö
- * htmlÊÂ¼ş´¦Àí³ÌĞò thisÍêÃÀÖ§³Ö
- * addEventListener thisÍêÃÀÖ§³Ö
- * attachEvent thisÖ¸Ïòwindow
+ * onclick thisï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+ * htmlï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ thisï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+ * addEventListener thisï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+ * attachEvent thisÖ¸ï¿½ï¿½window
  * */
 
 
 var EventUtil = {
-    addEventHandler:function(element,type,handler){
-        if(element.addEventListener){
-            element.addEventListener(type,handler,false);
+//æ·»åŠ äº‹ä»¶ç›‘å¬
+    addEventHandler: function(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
         }
-        else if(element.attachEvent) {
-            element.attachEvent('on'+type,handler);
+        else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
         }
-        else{
-            element['on'+type]=handler;
-        }
-    },
-    removeEventHandler:function(element,type,handler){
-        if(element.removeEventListener){
-            element.removeEventListener(type,handler,false);
-        }
-        else if(element.detachEvent){
-            element.detachEvent('on'+type,handler);
-        }
-        else{
-            element['on'+type]=null;
+        else {
+            element['on' + type] = handler;
         }
     },
-    getEvent: function (event) {
+    //ç§»é™¤äº‹ä»¶ç›‘å¬
+    removeEventHandler: function(element, type, handler) {
+        if (element.removeEventListener) {
+            element.removeEventListener(type, handler, false);
+        }
+        else if (element.detachEvent) {
+            element.detachEvent('on' + type, handler);
+        }
+        else {
+            element['on' + type] = null;
+        }
+    },
+    //è·å–eventå¯¹è±¡
+    getEvent: function(event) {
         return event ? event : window.event;
     },
-    getTarget:function(event){
+    //è·å–ç›®æ ‡å¯¹è±¡
+    getTarget: function(event) {
         return event.target || event.srcElement;
     },
-    preventDefault:function(event){
-        if(event.preventDefault){
+    //é˜»æ­¢é»˜è®¤è¡Œä¸º
+    preventDefault: function(event) {
+        if (event.preventDefault) {
             event.preventDefault();
         }
-        else{
+        else {
             event.returnValue = false;
         }
     },
-    stopPropagation:function(event){
-        if(event.stopPropagation)
+    //é˜»æ­¢äº‹ä»¶å†’æ³¡
+    stopPropagation: function(event) {
+        if (event.stopPropagation)
         {
             event.stopPropagation();
         }
-        else{
-            event.cancelBubble=true;
+        else {
+            event.cancelBubble = true;
+        }
+    },
+    //åœ¨å‘ç”Ÿ mouseover å’Œmouserout äº‹ä»¶æ—¶,è·å–ç›¸å…³å…ƒç´ 
+    getRelatedTarget: function(event) {
+        if (event.relatedTarget) {
+            return event.relatedTarget;
+        } else if (event.toElement) {
+            return event.toElement;
+        } else if (event.fromElement) {
+            return event.fromElement;
+        } else {
+            return null;
+        }
+    },
+    //å‘ç”Ÿclickäº‹ä»¶,è¿”å› 0 è¡¨ç¤ºä¸»é¼ æ ‡æŒ‰é’®ï¼Œ1 è¡¨ç¤ºä¸­é—´çš„é¼ æ ‡æŒ‰é’®ï¼ˆé¼ æ ‡æ»šè½®æŒ‰é’®ï¼‰ï¼Œ2 è¡¨ç¤ºæ¬¡é¼ æ ‡æŒ‰é’®
+    getButton: function(event) {
+        if (document.implementation.hasFeature("MouseEvents", "2.0")) {
+            return event.button;
+        } else {
+            switch (event.button) {
+                case 0:
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                    return 0;
+                case 2:
+                case 6:
+                    return 2;
+                case 4:
+                    return 1;
+            }
+        }
+    },
+    //å‘ç”Ÿmousewheeläº‹ä»¶,è·å–æ»šè½®çš„å¢é‡å€¼
+    getWheelDelta: function(event) {
+        if (event.wheelDelta) {
+            return (client.engine.opera && client.engine.opera < 9.5 ?
+                    -event.wheelDelta : event.wheelDelta);
+        } else {
+            return -event.detail * 40;
+        }
+    },
+    //å‘ç”Ÿkeypressäº‹ä»¶,è¿”å›é”®ç 
+    getCharCode: function(event) {
+        if (typeof event.charCode == "number") {
+            return event.charCode;
+        } else {
+            return event.keyCode;
         }
     }
 
