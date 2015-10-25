@@ -1,35 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-<script src="../../js/UseEvent.js"></script>
-</head>
-<body>
-<img src="../../images/Chrysanthemum.jpg" id="img"/>
-<script>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        <script src="../../js/UseEvent.js"></script>
+    </head>
+    <body>
+        <img src="../../images/Chrysanthemum.jpg" id="img"/>
+        <script>
+            var img = document.getElementById('img');
+
+            //mouseover事件
+            EventUtil.addEventHandler(img, 'mouseover', function(event) {
+                event = EventUtil.getEvent(event);
+                console.log(event.metaKey);
+                console.log(event.altKey);
+                console.log(event.ctrlKey);
+                console.log(event.shiftKey);
+            });
+            
+            //滚轮事件
+            (function() {
+                function handleMouseWheel(event) {
+                    event = EventUtil.getEvent(event);
+                    var delta = EventUtil.getWheelDelta(event);
+                    alert(delta);
+                }
+                EventUtil.addHandler(document, "mousewheel", handleMouseWheel);
+                EventUtil.addHandler(document, "DOMMouseScroll", handleMouseWheel);
+            })();
 
 
-
-
-    /*
-    * 鼠标与滚轮事件
-    *   click
-    *   dbclick
-    *   mousedown
-    *   mouseenter
-    *   mouseleave
-    *   mousemove
-    *   mouseout
-    *   mouseover
-    *   mouseup
-    *
-    *
-    *
-    *
-    * */
-
-
-</script>
-</body>
+            /*
+             * 鼠标与滚轮事件
+             *   click
+             *   dbclick
+             *   mousedown
+             *   mouseenter
+             *   mouseleave
+             *   mousemove
+             *   mouseout
+             *   mouseover
+             *   mouseup
+             *
+             *
+             *
+             *
+             * */
+        </script>
+    </body>
 </html>
