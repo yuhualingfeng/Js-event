@@ -3,29 +3,84 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        #mouseEnterAndMouseLeave,#mouseOverAndMouseOut{padding:40px;background:gray;}
+        #mouseEnterAndMouseLeave div,#mouseOverAndMouseOut div{width:200px;height: 100px;background:greenyellow;text-align: center;line-height:50px;}
+    </style>
 <script src="../../js/UseEvent.js"></script>
 </head>
 <body>
-<img src="../../images/Chrysanthemum.jpg" id="img"/>
+
+<div>
+    <button id="clickEvent">click Event</button><br/>
+    <button id="dblClickEvent">dblClick Event</button><br/>
+    <button id="mouseDownAndMouseUp">mouseDown and mouseUp(控制台查看事件处理)</button><br/>
+
+</div>
+
+<div id="mouseEnterAndMouseLeave">
+    <div>mouseEnterAndMouseLeave(控制台查看事件处理)</div>
+</div>
+<br/>
+<div id="mouseOverAndMouseOut">
+    <div>mouseOverAndMouseOut(控制台查看事件处理)</div>
+</div>
+
 <script>
 
+    EventUtil.addEventHandler(document.getElementById('clickEvent'),'click',function(){
+        alert("click !");
+    });
 
+    EventUtil.addEventHandler(document.getElementById('dblClickEvent'),'dblclick',function(){
+        alert("dbClick !");
+    });
+
+    EventUtil.addEventHandler(document.getElementById('mouseDownAndMouseUp'),'mousedown',function(event){
+        console.log('mouseDown !');
+    });
+
+    EventUtil.addEventHandler(document.getElementById('mouseDownAndMouseUp'),'mouseup',function(event){
+       console.log("mouseUp !");
+    });
+
+    EventUtil.addEventHandler(document.getElementById('mouseEnterAndMouseLeave'),'mouseenter',function(){
+        console.log('mouseEnter !');
+    });
+
+    EventUtil.addEventHandler(document.getElementById('mouseEnterAndMouseLeave'),'mouseleave',function(){
+       console.log('mouseLeave !');
+    });
+
+    EventUtil.addEventHandler(document.getElementById('mouseOverAndMouseOut'),'mouseover',function(){
+       console.log("mouseOver !");
+    });
+
+    EventUtil.addEventHandler(document.getElementById('mouseOverAndMouseOut'),"mouseout",function(){
+        console.log("mouseOut !");
+    });
+
+    var mousemoveCount = 0;
+    EventUtil.addEventHandler(document,'mousemove',function(){
+        console.log(++mousemoveCount);
+    });
 
 
     /*
     * 鼠标与滚轮事件
     *   click
-    *   dbclick
+    *   dblclick
+    *
     *   mousedown
-    *   mouseenter
-    *   mouseleave
-    *   mousemove
-    *   mouseout
-    *   mouseover
     *   mouseup
     *
+    *   mouseenter
+    *   mouseleave
     *
+    *   mousemove
     *
+    *   mouseover
+    *   mouseout
     *
     * */
 

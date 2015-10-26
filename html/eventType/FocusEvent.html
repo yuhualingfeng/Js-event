@@ -23,6 +23,16 @@
        console.log('input2 focus');
     });
 
+//    EventUtil.addEventHandler(window,'beforeunload',function(){
+//        return "确定要退出吗？";
+//    });
+    document.body.onbeforeunload=function(e){
+        e = e || window.e;
+        document.cookie="name=quit";
+
+        return "确定要退出吗,亲？";
+    }
+
 
     /*
     * 焦点事件
