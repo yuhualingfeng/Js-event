@@ -25,6 +25,9 @@
 <div id="mouseOverAndMouseOut">
     <div>mouseOverAndMouseOut(控制台查看事件处理)</div>
 </div>
+<div>
+<img src="../../images/Chrysanthemum.jpg" id="img"/>
+</div>
 
 <script>
 
@@ -60,11 +63,31 @@
         console.log("mouseOut !");
     });
 
+            var img = document.getElementById('img');
+
+            //mouseover事件
+            EventUtil.addEventHandler(img, 'mouseover', function(event) {
+                event = EventUtil.getEvent(event);
+                console.log(event.metaKey);
+                console.log(event.altKey);
+                console.log(event.ctrlKey);
+                console.log(event.shiftKey);
+            });
+            
+            //滚轮事件
+            (function() {
+                function handleMouseWheel(event) {
+                    event = EventUtil.getEvent(event);
+                    var delta = EventUtil.getWheelDelta(event);
+                    alert(delta);
+                }
+                EventUtil.addHandler(document, "mousewheel", handleMouseWheel);
+                EventUtil.addHandler(document, "DOMMouseScroll", handleMouseWheel);
+            })();
     var mousemoveCount = 0;
     EventUtil.addEventHandler(document,'mousemove',function(){
         console.log(++mousemoveCount);
     });
-
 
     /*
     * 鼠标与滚轮事件

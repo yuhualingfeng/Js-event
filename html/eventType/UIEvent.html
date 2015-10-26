@@ -14,7 +14,7 @@
     EventUtil.addEventHandler(img,'load',function(){
         console.log('img loaded');
     });
-    window.addEventListener(window,'unload',function(){
+    EventUtil.addEventHandler(window,'unload',function(){
         document.cookie='version=2';
     });
 
@@ -31,6 +31,7 @@
             console.log(document.body.scrollTop);
         }
     });
+    
 
 
 
